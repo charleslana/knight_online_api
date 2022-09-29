@@ -156,6 +156,9 @@
             <resource>
                 <directory>src/test/resources</directory>
                 <filtering>true</filtering>
+                <includes>
+                    <include>application-test.properties</include>
+                </includes>
             </resource>
         </resources>
     </build>
