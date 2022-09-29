@@ -144,11 +144,6 @@
                     <target>18</target>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>3.2.0</version>
-            </plugin>
         </plugins>
         <resources>
             <resource>
@@ -161,6 +156,9 @@
             <resource>
                 <directory>src/test/resources</directory>
                 <filtering>true</filtering>
+                <includes>
+                    <include>application.yml</include>
+                </includes>
             </resource>
         </resources>
     </build>
