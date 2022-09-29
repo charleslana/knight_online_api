@@ -153,6 +153,10 @@
                     <include>application.yml</include>
                 </includes>
             </resource>
+            <resource>
+                <directory>src/test/resources</directory>
+                <filtering>true</filtering>
+            </resource>
         </resources>
     </build>
 
