@@ -3,6 +3,7 @@ package com.charles.knightonline.security;
 import com.charles.knightonline.config.PropertiesConfig;
 import com.charles.knightonline.security.filter.CustomAuthenticationFilter;
 import com.charles.knightonline.security.filter.CustomAuthorizationFilter;
+import com.charles.knightonline.security.strict.RequestRejectedExceptionFilter;
 import com.charles.knightonline.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -12,6 +13,7 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 
@@ -37,6 +39,7 @@ public class SecurityConfig {
         http.csrf().disable().authorizeRequests().anyRequest().permitAll().and().cors().configurationSource(request -> getCorsConfiguration());
         http.addFilter(new CustomAuthenticationFilter(authenticationManager(new AuthenticationConfiguration()), propertiesConfig, service));
         http.addFilterBefore(new CustomAuthorizationFilter(propertiesConfig, service), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(new RequestRejectedExceptionFilter(), ChannelProcessingFilter.class);
         return http.build();
     }
 
